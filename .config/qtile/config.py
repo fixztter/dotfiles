@@ -80,7 +80,6 @@ keys = [
     Key([mod, "control"], "k",
         lazy.layout.grow_up(),
         lazy.layout.grow(),
-
         ),
     Key([mod, "control"], "Left",
         lazy.layout.grow_left(),
@@ -116,7 +115,7 @@ keys = [
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout()),
     Key([mod, "shift"], "Tab", lazy.prev_layout()),
-    Key([mod], "w", lazy.window.kill()),
+    Key([mod], "q", lazy.window.kill()),
 
     # Volume
     Key([], "XF86AudioLowerVolume", lazy.spawn(
@@ -135,21 +134,27 @@ keys = [
     Key([mod, "control"], "q", lazy.shutdown()),
 ]
 
-groups = [Group(i) for i in "123456789"]
+groups = []
+
+group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+
+group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+
+group_layouts = ["monadtall", "monadtall", "monadtall", "monadtall",
+                 "monadtall", "monadtall", "monadtall", "monadtall", "monadtall"]
+
+for i in range(len(group_names)):
+    groups.append(
+        Group(
+            name=group_names[i],
+            layout=group_layouts[i].lower(),
+            label=group_labels[i],
+        ))
 
 for i in groups:
     keys.extend([
-        # mod1 + letter of group = switch to group
-        Key([mod], i.name, lazy.group[i.name].toscreen(),
-            desc="Switch to group {}".format(i.name)),
-
-        # mod1 + shift + letter of group = switch to & move focused window to group
-        Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=True),
-            desc="Switch to & move focused window to group {}".format(i.name)),
-        # Or, use below if you prefer not to switch to that group.
-        # # mod1 + shift + letter of group = move focused window to group
-        # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
-        #     desc="move focused window to group {}".format(i.name)),
+        Key([mod], i.name, lazy.group[i.name].toscreen()),
+        Key([mod, "shift"], i.name, lazy.window.togroup(i.name))
     ])
 
 
