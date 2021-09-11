@@ -52,6 +52,7 @@ keys = [
     Key([mod], "Down", lazy.layout.down()),
     Key([mod], "Up", lazy.layout.up()),
     Key([mod], "space", lazy.layout.next()),
+
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
     Key([mod, "shift"], "h", lazy.layout.shuffle_left()),
@@ -62,43 +63,61 @@ keys = [
     Key([mod, "shift"], "Right", lazy.layout.swap_right()),
     Key([mod, "shift"], "Down", lazy.layout.shuffle_down()),
     Key([mod, "shift"], "Up", lazy.layout.shuffle_up()),
-    # Grow windows. If current window is on the edge of screen and direction
-    # will be to screen edge - window would shrink.
-    Key([mod, "control"], "h", lazy.layout.grow_left(),
-        desc="Grow window to the left"),
-    Key([mod, "control"], "l", lazy.layout.grow_right(),
-        desc="Grow window to the right"),
-    Key([mod, "control"], "j", lazy.layout.grow_down(),
-        desc="Grow window down"),
-    Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
-    Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
 
-    # Toggle between split and unsplit sides of stack.
-    # Split = all windows displayed
-    # Unsplit = 1 window displayed, like Max layout, but still with
-    # multiple stack panes
+    # Resize left, right, down, left
+    Key([mod, "control"], "h",
+        lazy.layout.grow_left(),
+        lazy.layout.shrink()
+        ),
+    Key([mod, "control"], "l",
+        lazy.layout.grow_right(),
+        lazy.layout.grow()
+        ),
+    Key([mod, "control"], "j",
+        lazy.layout.grow_down(),
+        lazy.layout.shrink(),
+        ),
+    Key([mod, "control"], "k",
+        lazy.layout.grow_up(),
+        lazy.layout.grow(),
+
+        ),
+    Key([mod, "control"], "Left",
+        lazy.layout.grow_left(),
+        lazy.layout.shrink(),
+        ),
+    Key([mod, "control"], "Right",
+        lazy.layout.grow_right(),
+        lazy.layout.grow(),
+        ),
+    Key([mod, "control"], "Down",
+        lazy.layout.grow_down(),
+        lazy.layout.shrink(),
+        ),
+    Key([mod, "control"], "Up",
+        lazy.layout.grow_up(),
+        lazy.layout.grow(),
+        ),
+    Key([mod], "n", lazy.layout.normalize()),
+
+    # Toggle floating, fullscreen
     Key([mod, "shift"], "f", lazy.window.toggle_floating()),
     Key([mod], "f", lazy.window.toggle_fullscreen()),
 
-    Key([mod], "Return", lazy.spawn(terminal),
-        desc="Launch terminal"),
+    Key([mod], "Return", lazy.spawn(terminal)),
     Key([mod, "shift"], "Return", lazy.spawn("rofi -show drun")),
-    Key([mod], "e", lazy.spawn("thunar"),
-        desc="Lunch file manager"),
-    Key([mod], "F12", lazy.spawn("betterlockscreen -l"),
-        desc="Lock screen"),
+    Key([mod], "e", lazy.spawn("thunar")),
+    Key([mod], "F12", lazy.spawn("betterlockscreen -l")),
 
     # Screenshot
     Key([], "Print", lazy.spawn("scrot")),
     Key(["shift"], "Print", lazy.spawn("scrot -s")),
-    # Toggle between different layouts as defined below
-    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([mod, "shift"], "Tab", lazy.prev_layout()),
-    Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
 
-    Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
-    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    # Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    # Toggle between different layouts as defined below
+    Key([mod], "Tab", lazy.next_layout()),
+    Key([mod, "shift"], "Tab", lazy.prev_layout()),
+    Key([mod], "w", lazy.window.kill()),
+
     # Volume
     Key([], "XF86AudioLowerVolume", lazy.spawn(
         "pactl set-sink-volume @DEFAULT_SINK@ -5%")),
@@ -110,6 +129,10 @@ keys = [
     # Brightness
     # Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +5%")),
     # Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 5%-")),
+
+    # Restart, Shutdown
+    Key([mod, "control"], "r", lazy.restart()),
+    Key([mod, "control"], "q", lazy.shutdown()),
 ]
 
 groups = [Group(i) for i in "123456789"]
@@ -129,12 +152,16 @@ for i in groups:
         #     desc="move focused window to group {}".format(i.name)),
     ])
 
-layout_theme = {"border_width": 1,
-                "margin": 7,
-                "border_focus": "#81a1c1",
-                "border_normal": "#0f111a"
-                }
 
+def init_layout_theme():
+    return {"border_width": 1,
+            "margin": 7,
+            "border_focus": "#84a0c6",
+            "border_normal": "#161821"
+            }
+
+
+layout_theme = init_layout_theme()
 
 layouts = [
     layout.Max(**layout_theme),
@@ -142,37 +169,130 @@ layouts = [
     layout.MonadWide(**layout_theme),
     layout.Bsp(**layout_theme),
     layout.Matrix(**layout_theme),
-    # layout.Columns(border_focus_stack='#d75f5f'),
-    # layout.Stack(num_stacks=2),
-    # layout.RatioTile(),
-    # layout.Tile(),
-    # layout.TreeTab(),
-    # layout.VerticalTile(),
-    # layout.Zoomy(),
 ]
 
-widget_defaults = dict(
-    font='JetBrainsMono Nerd Font Bold',
-    fontsize=12,
-    padding=3,
-)
+
+def init_colors():
+    return [["#161821", "#161821"],
+            ["#161821", "#161821"],
+            ["#c6c8d1", "#c6c8d1"],
+            ["#e2a478", "#e2a478"],
+            ["#84a0c6", "#84a0c6"],
+            ["#f8f8f2", "#f8f8f2"],
+            ["#e27878", "#e27878"],
+            ["#b4be82", "#b4be82"],
+            ["#91acd1", "#91acd1"],
+            ["#d2d4de", "#d2d4de"]]
+
+
+colors = init_colors()
+
+
+def init_widgets_defaults():
+    return dict(
+        font='JetBrainsMono Nerd Font Bold',
+        fontsize=12,
+        padding=3,
+        background=colors[1]
+    )
+
+
+widget_defaults = init_widgets_defaults()
+
 extension_defaults = widget_defaults.copy()
 
-screens = [
-    Screen(
-        top=bar.Bar(
-            [
-                widget.GroupBox(),
-                widget.Prompt(),
-                widget.WindowName(),
-                widget.Systray(),
-                widget.CurrentLayout(),
-                widget.Clock(format='%d/%m/%Y - %H:%M'),
-            ],
-            24,
+
+def init_widgets_list():
+    widgets_list = [
+        widget.GroupBox(
+            font="JetBrainsMono Nerd Font Bold",
+            fontsize=12,
+            margin_x=0,
+            margin_y=3,
+            padding_x=3,
+            padding_y=5,
+            borderwidth=3,
+            disable_drag=True,
+            rounded=False,
+            highlight_method="text",
+            active=colors[9],
+            inactive=colors[5],
+            highlight_color=colors[2],
+            this_current_screen_border=colors[8],
+            background=colors[1],
+            foreground=colors[2]
         ),
-    ),
-]
+        widget.Sep(
+            linewidth=0,
+            padding=5,
+        ),
+        widget.Sep(
+            linewidth=0,
+            padding=5,
+        ),
+        widget.WindowName(
+            font="JetBrainsMono Nerd Font Bold",
+            fontsize=12,
+            background=colors[1],
+            foreground=colors[5]
+        ),
+        widget.Sep(
+            linewidth=0,
+            padding=5,
+        ),
+        widget.Systray(
+            background=colors[1],
+            padding=5
+        ),
+        widget.Sep(
+            linewidth=0,
+            padding=5,
+        ),
+        widget.CurrentLayout(
+            font="JetBrainsMono Nerd Font Bold",
+            fontsize=12,
+            background=colors[1],
+            foreground=colors[5]
+        ),
+        widget.Sep(
+            linewidth=0,
+            padding=5,
+        ),
+        widget.TextBox(
+            font="FontAwesome",
+            text="  ",
+            foreground=colors[3],
+            background=colors[1],
+            padding=0,
+            fontsize=18
+        ),
+        widget.Clock(
+            fontsize=12,
+            background=colors[1],
+            foreground=colors[5],
+            format='%Y-%m-%d %H:%M'
+        ),
+    ]
+    return widgets_list
+
+
+widgets_list = init_widgets_list()
+
+
+def init_widgets_screen1():
+    widgets_screen1 = init_widgets_list()
+    return widgets_screen1
+
+
+widgets_screen1 = init_widgets_screen1()
+
+
+def init_screens():
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=24, opacity=0.9))]
+
+
+screens = init_screens()
+
 
 # Drag floating layouts.
 mouse = [
