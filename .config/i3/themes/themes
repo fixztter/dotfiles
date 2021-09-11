@@ -1,0 +1,140 @@
+				#################### COLOR SCHEMES ####################
+
+colors {
+								background #282c34
+								statusline #61afef
+								separator  #e06c75
+								focused_workspace  #61afef #61afef #282c34
+								active_workspace   #282c34 #282c34 #61afef
+								inactive_workspace #282c34 #282c34 #61afef
+                binding_mode       #e06c75 #e06c75 #282c34
+								urgent_workspace   #e06c75 #e06c75 #282c34
+				}
+
+# class                   border  backgr. text    indic.   child_border
+client.focused          #61afef #61afef #fafafa #61afef
+client.focused_inactive #282c34 #282c34 #abb2bf #282c34
+client.unfocused        #282c34 #282c34 #abb2bf #282c34
+client.urgent           #e06c75 #e06c75 #fafafa #e06c75
+
+client.background       #fafafa
+
+colors {
+				background #1d2021
+				statusline #d79921
+				separator  #cc241d
+				focused_workspace  #689d68 #689d68 #1d2021
+				active_workspace   #1d2021 #1d2021 #d79921
+				inactive_workspace #1d2021 #1d2021 #d79921
+				binding_mode       #F9FAF9 #F9FAF9 #2F343F
+				urgent_workspace   #cc241d #cc241d #1d2021
+}
+
+# Workspace
+ Class					border	backgr. text	indic. 	child_border
+ client.focused          #458588 #458588 #1d2021 #b16286	#d79921
+ client.focused_inactive #1d2021 #1d2021 #d79921 #b16286
+ client.unfocused        #1d2021 #1d2021 #d79921 #b16286
+ client.urgent           #cc241d #cc241d #ffffff #cc241d
+ client.placeholder      #000000 #0C0C0C #FFFFFF #000000 
+ client.background       #1d2021
+
+
+# Dracula custom colors
+colors {
+								background #282A36
+								statusline #bd93f9
+								separator  #ff5555
+								focused_workspace  #ff79c6 #ff79c6 #282A36
+								active_workspace   #282A36 #282A36 #bd93f9
+								inactive_workspace #282A36 #282A36 #bd93f9
+                binding_mode       #8be9fd #8be9fd #282A36
+								urgent_workspace   #ff5555 #ff5555 #282A36
+				}
+
+# class                   border  backgr. text    indic.   child_border
+client.focused          #ff79c6 #ff79c6 #f8f8f2 #ff79c6
+client.focused_inactive #282A36 #282A36 #BFBFBF #282A36
+client.unfocused        #282A36 #282A36 #BFBFBF #282A36
+client.urgent           #FF5555 #FF5555 #f8f8f2 #FF5555
+
+client.background       #f8f8f2
+
+# One Dark custom colors
+colors {
+								background #282c34
+								statusline #98c379
+								separator  #e06c75
+								focused_workspace  #98c379 #98c379 #282c34
+								active_workspace   #282c34 #282c34 #98c379
+								inactive_workspace #282c34 #282c34 #98c379
+                binding_mode       #e06c75 #e06c75 #282c34
+								urgent_workspace   #e06c75 #e06c75 #282c34
+				}
+
+# class                   border  backgr. text    indic.   child_border
+client.focused          #98c379 #98c379 #fafafa #98c379
+client.focused_inactive #282c34 #282c34 #abb2bf #282c34
+client.unfocused        #282c34 #282c34 #abb2bf #282c34
+client.urgent           #e06c75 #e06c75 #fafafa #e06c75
+
+client.background       #fafafa
+
+
+				#################### OTHERS ####################
+
+# Archlinux
+# class                   border  backgr. text    indic.   child_border
+# client.focused          #0088CC #0088CC #ffffff #dddddd
+# client.focused_inactive #333333 #333333 #888888 #292d2e
+# client.unfocused        #333333 #333333 #888888 #292d2e
+# wclient.urgent           #2f343a #900000 #ffffff #900000
+
+# Lime
+# class                   border  backgr. text    indic.   child_border
+# client.focused          #4E9C00 #4E9C00 #FFFFFF #FFFFFF
+# client.focused_inactive #1B3600 #1B3600 #888888 #FFFFFF
+# client.unfocused        #333333 #333333 #888888 #FFFFFF
+# client.urgent           #C20000 #C20000 #FFFFFF #FFFFFF
+
+# Okraits
+# class                   border  backgr. text    indic.   child_border
+# client.focused          #888888 #dddddd #222222 #2e9ef4
+# client.focused          #888888 #d8dfbc #222222 #d8dfbc
+# client.focused_inactive #333333 #555555 #bbbbbb #484e50
+# client.unfocused        #333333 #333333 #888888 #292d2e
+# client.urgent           #2f343a #900000 #ffffff #900000
+
+# Seti
+# class                   border  backgr. text    indic.   child_border
+# client.focused          #4F99D3 #4F99D3 #151718 #9FCA56
+# client.focused_inactive #1f2326 #1f2326 #AAAAAA #A074C4
+# client.unfocused        #1f2326 #1f2326 #AAAAAA #A074C4
+# client.urgent           #CE4045 #CE4045 #FFFFFF #DCCD69
+
+# Slate
+# class                   border  backgr. text    indic.   child_border
+# client.focused          #586e75 #586e75 #fdf6e3 #268bd2
+# client.focused_inactive #073642 #073642 #93a1a1 #002b36
+# client.unfocused        #002b36 #002b36 #586e75 #002b36
+# client.urgent           #dc322f #dc322f #fdf6e3 #dc322f
+
+# Solarized
+# class                     border  backgr. text    indic.   child_border
+# client.focused            #859900 #859900 #fdf6e3 #859900
+# client.focused_inactive   #073642 #073642 #eee8d5 #6c71c4
+# client.focused_inactive   #073642 #073642 #eee8d5 #073642
+# client.unfocused          #073642 #073642 #93a1a1 #586e75
+# client.urgent             #d33682 #d33682 #fdf6e3 #dc322f
+
+# Debian
+# class                   border  backgr. text    indic.   child_border
+# client.focused          #d70a53 #d70a53 #ffffff #8c0333
+# client.focused_inactive #333333 #333333 #888888 #333333
+# client.unfocused        #333333 #333333 #888888 #333333
+# client.urgent           #eb709b #eb709b #ffffff #eb709b
+
+# client.focused          #9D5110 #9D5110 #FFFFFF #FFFFFF
+# client.focused_inactive #7A3F0C #7A3F0C #888888 #FFFFFF
+# client.unfocused        #333333 #333333 #888888 #FFFFFF
+# client.urgent           #C20000 #C20000 #FFFFFF #FFFFFF

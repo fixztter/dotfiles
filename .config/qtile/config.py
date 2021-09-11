@@ -43,10 +43,14 @@ terminal = "alacritty"
 
 keys = [
     # Switch between windows
-    Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
-    Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
-    Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
-    Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
+    Key([mod], "h", lazy.layout.left(),
+        desc="Move focus to left"),
+    Key([mod], "l", lazy.layout.right(),
+        desc="Move focus to right"),
+    Key([mod], "j", lazy.layout.down(),
+        desc="Move focus down"),
+    Key([mod], "k", lazy.layout.up(),
+        desc="Move focus up"),
     Key([mod], "space", lazy.layout.next(),
         desc="Move window focus to other window"),
 
@@ -58,7 +62,8 @@ keys = [
         desc="Move window to the right"),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(),
         desc="Move window down"),
-    Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
+    Key([mod, "shift"], "k", lazy.layout.shuffle_up(),
+        desc="Move window up"),
 
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
@@ -75,12 +80,17 @@ keys = [
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
-    # Key([mod, "shift"], "f", lazy.window.toggle_floating()),
+    Key([mod, "shift"], "f", lazy.window.toggle_floating()),
     Key([mod], "f", lazy.window.toggle_fullscreen()),
 
-    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([mod], "Return", lazy.spawn(terminal),
+        desc="Launch terminal"),
     Key([mod, "shift"], "Return", lazy.spawn("rofi -show drun")),
-    Key([mod], "e", lazy.spawn("thunar"), desc="Lunch file manager"),
+    Key([mod], "e", lazy.spawn("thunar"),
+        desc="Lunch file manager"),
+    Key([mod], "F12", lazy.spawn("betterlockscreen -l"),
+        desc="Lock screen"),
+
     # Screenshot
     Key([], "Print", lazy.spawn("scrot")),
     Key(["shift"], "Print", lazy.spawn("scrot -s")),
