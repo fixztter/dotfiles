@@ -227,11 +227,7 @@ def init_widgets_list():
             background=colors[1],
             foreground=colors[2]
         ),
-        widget.Sep(
-            linewidth=0,
-            padding=5,
-        ),
-        widget.Sep(
+       widget.Sep(
             linewidth=0,
             padding=5,
         ),
@@ -322,7 +318,7 @@ floating_layout = layout.Floating(float_rules=[
     Match(wm_class='ssh-askpass'),  # ssh-askpass
     Match(title='branchdialog'),  # gitk
     Match(title='pinentry'),  # GPG key password entry
-])
+], **layout_theme)
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
