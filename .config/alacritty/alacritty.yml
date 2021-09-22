@@ -24,64 +24,53 @@ scrolling:
 
   multiplier: 10
 
-# Color schemes
 colors:
   # Default colors
   primary:
-    background: '0x1e2127'
-    foreground: '0xabb2bf'
+    background: '0x161821'
+    foreground: '0xd2d4de'
 
   # Normal colors
   normal:
-    black:   '0x1e2127'
-    red:     '0xe06c75'
-    green:   '0x98c379'
-    yellow:  '0xd19a66'
-    blue:    '0x61afef'
-    magenta: '0xc678dd'
-    cyan:    '0x56b6c2'
-    white:   '0x828791'
- 
+    black:   '0x161821'
+    red:     '0xe27878'
+    green:   '0xb4be82'
+    yellow:  '0xe2a478'
+    blue:    '0x84a0c6'
+    magenta: '0xa093c7'
+    cyan:    '0x89b8c2'
+    white:   '0xc6c8d1'
+
+  # Bright colors
   bright:
-    black:   '0x5c6370'
-    red:     '0xe06c75'
-    green:   '0x98c379'
-    yellow:  '0xd19a66'
-    blue:    '0x61afef'
-    magenta: '0xc678dd'
-    cyan:    '0x56b6c2'
-    white:   '0xe6efff'
-  dim:
-    black:   '0x1e2127'
-    red:     '0xe06c75'
-    green:   '0x98c379'
-    yellow:  '0xd19a66'
-    blue:    '0x61afef'
-    magenta: '0xc678dd'
-    cyan:    '0x56b6c2'
-    white:   '0x828791'
+    black:   '0x6b7089'
+    red:     '0xe98989'
+    green:   '0xa3be8c'
+    yellow:  '0xe9b189'
+    blue:    '0x91acd1'
+    magenta: '0xada0d3'
+    cyan:    '0x95c4ce'
+    white:   '0xd2d4de'
 
-background_opacity: 0.95
-
-# background_opacity: 1.0
+background_opacity: 0.9
 
 # Font configuration
 font:
   normal:
-    family: UbuntuMono Nerd Font
-    style: Regular
+    family: Source Code Pro 
+    style: Medium
   bold:
-    family: UbuntuMono Nerd Font
+    family: Source Code Pro 
     style: Bold
   italic:
-    family: UbuntuMono Nerd Font
+    family: Source Code Pro  
     style: Italic
   bold_italic:
-    family: UbuntuMono Nerd Font
+    family: Source Code Pro  
     style: Bold Italic
 
   # Point size
-  size: 13.0
+  size: 12.0
 
   # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
