@@ -140,8 +140,8 @@ group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-group_layouts = ["monadtall", "monadtall", "monadtall", "monadtall",
-                 "monadtall", "monadtall", "monadtall", "monadtall", "monadtall"]
+group_layouts = ["monadtall", "max", "max", "monadwide",
+                 "monadwide", "bsp", "matrix", "bsp", "monadtall"]
 
 for i in range(len(group_names)):
     groups.append(
@@ -179,14 +179,14 @@ layouts = [
 
 def init_colors():
     return [["#161821", "#161821"],
-            ["#161821", "#161821"],
+            ["#6b7089", "#6b7089"],
             ["#c6c8d1", "#c6c8d1"],
+            ["#e27878", "#e27878"],
             ["#e2a478", "#e2a478"],
             ["#84a0c6", "#84a0c6"],
-            ["#f8f8f2", "#f8f8f2"],
-            ["#e27878", "#e27878"],
-            ["#b4be82", "#b4be82"],
-            ["#91acd1", "#91acd1"],
+            ["#a093c7", "#a093c7"],
+            ["#89b8c2", "#89b8c2"],
+            ["#95c4ce", "#95c4ce"],
             ["#d2d4de", "#d2d4de"]]
 
 
@@ -195,10 +195,10 @@ colors = init_colors()
 
 def init_widgets_defaults():
     return dict(
-        font='JetBrainsMono Nerd Font Bold',
-        fontsize=12,
+        font="JetBrainsMono Nerd Font Bold",
+        fontsize=14,
         padding=3,
-        background=colors[1]
+        background=colors[0]
     )
 
 
@@ -210,68 +210,98 @@ extension_defaults = widget_defaults.copy()
 def init_widgets_list():
     widgets_list = [
         widget.GroupBox(
-            font="JetBrainsMono Nerd Font Bold",
-            fontsize=12,
+            padding=7,
             margin_x=0,
-            margin_y=3,
-            padding_x=3,
-            padding_y=5,
             borderwidth=3,
             disable_drag=True,
             rounded=False,
-            highlight_method="text",
-            active=colors[9],
-            inactive=colors[5],
-            highlight_color=colors[2],
-            this_current_screen_border=colors[8],
-            background=colors[1],
-            foreground=colors[2]
-        ),
-       widget.Sep(
-            linewidth=0,
-            padding=5,
-        ),
-        widget.WindowName(
-            font="JetBrainsMono Nerd Font Bold",
-            fontsize=12,
-            background=colors[1],
-            foreground=colors[5]
+            highlight_method="block",
+            urgent_alert_method="block",
+            urgent_text=colors[3],
+            highlight_color=colors[1],
+            active=colors[5],
+            inactive=colors[2],
+            this_current_screen_border=colors[5],
+            block_highlight_text_color=colors[0],
+            background=colors[0],
+            foreground=colors[9]
         ),
         widget.Sep(
             linewidth=0,
-            padding=5,
-        ),
-        widget.Systray(
-            background=colors[1],
             padding=5
         ),
-        widget.Sep(
-            linewidth=0,
-            padding=5,
-        ),
-        widget.CurrentLayout(
-            font="JetBrainsMono Nerd Font Bold",
-            fontsize=12,
-            background=colors[1],
-            foreground=colors[5]
+        widget.WindowName(
+            background=colors[0],
+            foreground=colors[9]
         ),
         widget.Sep(
             linewidth=0,
-            padding=5,
+            padding=5
+        ),
+        widget.Systray(
+            background=colors[0]
+        ),
+        widget.Sep(
+            linewidth=0,
+            padding=5
         ),
         widget.TextBox(
-            font="FontAwesome",
-            text="  ",
-            foreground=colors[3],
-            background=colors[1],
-            padding=0,
-            fontsize=18
+            text="{",
+            background=colors[0],
+            foreground=colors[4]
+        ),
+        widget.CurrentLayout(
+            background=colors[0],
+            foreground=colors[9]
+        ),
+        widget.TextBox(
+            text="}",
+            background=colors[0],
+            foreground=colors[4]
+        ),
+        widget.Sep(
+            linewidth=0,
+            padding=5
+        ),
+        widget.TextBox(
+            text=" ",
+            background=colors[0],
+            foreground=colors[4]
+        ),
+        widget.Net(
+            interface="enp4s0",
+            background=colors[0],
+            foreground=colors[9]
+        ),
+        widget.Sep(
+            linewidth=0,
+            padding=5
+        ),
+        widget.TextBox(
+            text=" ",
+            background=colors[0],
+            foreground=colors[4]
+        ),
+        widget.CheckUpdates(
+            background=colors[0],
+            foreground=colors[9],
+            custom_command="checkupdates",
+            no_update_string='0',
+            display_format="{updates}"
+        ),
+        widget.Sep(
+            linewidth=0,
+            padding=5
+        ),
+        widget.TextBox(
+            text=" ",
+            background=colors[0],
+            foreground=colors[4]
         ),
         widget.Clock(
-            fontsize=12,
-            background=colors[1],
-            foreground=colors[5],
-            format='%Y-%m-%d %H:%M'
+            background=colors[0],
+            foreground=colors[9],
+            format="%Y-%m-%d %H:%M"
         ),
     ]
     return widgets_list
@@ -289,7 +319,7 @@ widgets_screen1 = init_widgets_screen1()
 
 
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=24, opacity=0.9))]
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=28, opacity=0.9))]
 
 
 screens = init_screens()
