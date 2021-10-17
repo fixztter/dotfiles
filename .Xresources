@@ -41,7 +41,7 @@ URxvt.cursorColor: white
 
 !! Extensions
 URxvt.perl-ext-common: default,matcher,resize-font,url-select,keyboard-select,clipboard
-URxvt.colorUL: #4682B4
+URxvt.colorUL: #81A1C1
 !! url-select
 URxvt.keysym.M-u: perl:url-select:select_next
 URxvt.url-select.launcher: urxvt -e lynx -cfg=~/.lynx.cfg -lss=~/.lynx.lss
@@ -58,7 +58,6 @@ URxvt.matcher.button: 1
 URxvt.keysym.M-c: perl:clipboard:copy
 URxvt.keysym.M-v: perl:clipboard:paste
 URxvt*depth: 32
-
 
 *background:  #0f111a
 *foreground:  #e5e9f0
@@ -78,4 +77,3 @@ URxvt*depth: 32
 *color13:  #B48EAD
 *color14:  #88C0D0
 *color15:  #B48EAD
-
