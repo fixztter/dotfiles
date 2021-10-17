@@ -161,7 +161,7 @@ for i in groups:
 def init_layout_theme():
     return {"border_width": 1,
             "margin": 7,
-            "border_focus": "#84a0c6",
+            "border_focus": "#91acd1",
             "border_normal": "#161821"
             }
 
@@ -180,12 +180,12 @@ layouts = [
 def init_colors():
     return [["#161821", "#161821"],
             ["#6b7089", "#6b7089"],
-            ["#c6c8d1", "#c6c8d1"],
-            ["#e27878", "#e27878"],
-            ["#e2a478", "#e2a478"],
-            ["#84a0c6", "#84a0c6"],
-            ["#a093c7", "#a093c7"],
-            ["#89b8c2", "#89b8c2"],
+            ["#d2d4de", "#d2d4de"],
+            ["#e98989", "#e98989"],
+            ["#c0ca8e", "#c0ca8e"],
+            ["#e9b189", "#e9b189"],
+            ["#91acd1", "#91acd1"],
+            ["#ada0d3", "#ada0d3"],
             ["#95c4ce", "#95c4ce"],
             ["#d2d4de", "#d2d4de"]]
 
@@ -217,11 +217,11 @@ def init_widgets_list():
             rounded=False,
             highlight_method="block",
             urgent_alert_method="block",
-            urgent_text=colors[3],
+            urgent_border=colors[3],
             highlight_color=colors[1],
-            active=colors[5],
-            inactive=colors[2],
-            this_current_screen_border=colors[5],
+            active=colors[6],
+            inactive=colors[9],
+            this_current_screen_border=colors[6],
             block_highlight_text_color=colors[0],
             background=colors[0],
             foreground=colors[9]
@@ -248,7 +248,7 @@ def init_widgets_list():
         widget.TextBox(
             text="{",
             background=colors[0],
-            foreground=colors[4]
+            foreground=colors[6]
         ),
         widget.CurrentLayout(
             background=colors[0],
@@ -257,16 +257,16 @@ def init_widgets_list():
         widget.TextBox(
             text="}",
             background=colors[0],
-            foreground=colors[4]
+            foreground=colors[6]
         ),
         widget.Sep(
             linewidth=0,
             padding=5
         ),
         widget.TextBox(
-            text=" ",
+            text="歷 ",
             background=colors[0],
-            foreground=colors[4]
+            foreground=colors[6]
         ),
         widget.Net(
             interface="enp4s0",
@@ -280,11 +280,13 @@ def init_widgets_list():
         widget.TextBox(
             text=" ",
             background=colors[0],
-            foreground=colors[4]
+            foreground=colors[6]
         ),
         widget.CheckUpdates(
             background=colors[0],
             foreground=colors[9],
+            colour_have_updates=colors[9],
+            colour_no_updates=colors[9],
             custom_command="checkupdates",
             no_update_string='0',
             display_format="{updates}"
@@ -296,7 +298,7 @@ def init_widgets_list():
         widget.TextBox(
             text=" ",
             background=colors[0],
-            foreground=colors[4]
+            foreground=colors[6]
         ),
         widget.Clock(
             background=colors[0],
@@ -319,7 +321,7 @@ widgets_screen1 = init_widgets_screen1()
 
 
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=28, opacity=0.9))]
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=28, opacity=0.95))]
 
 
 screens = init_screens()
