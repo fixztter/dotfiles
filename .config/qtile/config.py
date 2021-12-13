@@ -110,7 +110,7 @@ keys = [
 
     # Screenshot
     Key([], "Print", lazy.spawn("scrot")),
-    Key(["shift"], "Print", lazy.spawn("scrot -s")),
+    Key([mod], "s", lazy.spawn("scrot -s")),
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout()),
@@ -159,10 +159,10 @@ for i in groups:
 
 
 def init_layout_theme():
-    return {"border_width": 1,
-            "margin": 7,
-            "border_focus": "#91acd1",
-            "border_normal": "#161821"
+    return {"border_width": 2,
+            "margin": 14,
+            "border_focus": "#bd93f9",
+            "border_normal": "#282a36"
             }
 
 
@@ -178,16 +178,16 @@ layouts = [
 
 
 def init_colors():
-    return [["#161821", "#161821"],
-            ["#6b7089", "#6b7089"],
-            ["#d2d4de", "#d2d4de"],
-            ["#e98989", "#e98989"],
-            ["#c0ca8e", "#c0ca8e"],
-            ["#e9b189", "#e9b189"],
-            ["#91acd1", "#91acd1"],
-            ["#ada0d3", "#ada0d3"],
-            ["#95c4ce", "#95c4ce"],
-            ["#d2d4de", "#d2d4de"]]
+    return [["#282a36", "#282a36"],
+            ["#6272a4", "#6272a4"],
+            ["#f8f8f2", "#f8f8f2"],
+            ["#ff5555", "#ff5555"],
+            ["#50fa7b", "#50fa7b"],
+            ["#f1fa8c", "#f1fa8c"],
+            ["#bd93f9", "#bd93f9"],
+            ["#ff79c6", "#ff79c6"],
+            ["#8be9fd", "#8be9fd"],
+            ["#f8f8f2", "#f8f8f2"]]
 
 
 colors = init_colors()
@@ -195,7 +195,7 @@ colors = init_colors()
 
 def init_widgets_defaults():
     return dict(
-        font="JetBrainsMono Nerd Font Bold",
+        font="UbuntuMono Nerd Font Bold",
         fontsize=14,
         padding=3,
         background=colors[0]
@@ -219,8 +219,8 @@ def init_widgets_list():
             urgent_alert_method="block",
             urgent_border=colors[3],
             highlight_color=colors[1],
-            active=colors[6],
-            inactive=colors[9],
+            active=colors[9],
+            inactive=colors[1],
             this_current_screen_border=colors[6],
             block_highlight_text_color=colors[0],
             background=colors[0],
@@ -232,7 +232,7 @@ def init_widgets_list():
         ),
         widget.WindowName(
             background=colors[0],
-            foreground=colors[9]
+            foreground=colors[7]
         ),
         widget.Sep(
             linewidth=0,
@@ -321,7 +321,7 @@ widgets_screen1 = init_widgets_screen1()
 
 
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=28, opacity=0.95))]
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=24, opacity=1))]
 
 
 screens = init_screens()

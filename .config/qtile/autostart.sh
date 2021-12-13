@@ -1,10 +1,10 @@
 #! /bin/sh
 
-setxkbmap es &
-
 volumeicon &
 
 nm-applet &
+
+unclutter &
 
 picom &
 
