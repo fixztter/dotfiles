@@ -109,8 +109,10 @@ keys = [
     Key([mod], "F12", lazy.spawn("betterlockscreen -l")),
 
     # Screenshot
-    Key([], "Print", lazy.spawn("scrot")),
-    Key([mod], "s", lazy.spawn("scrot -s")),
+    Key([], "Print", lazy.spawn(
+        "scrot $HOME/Pictures/screenshots/%Y-%m-%d-%T-screenshot.png")),
+    Key([mod], "s", lazy.spawn(
+        "scrot --select $HOME/Pictures/cuts/%Y-%m-%d-%T-cut.png")),
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout()),
@@ -161,8 +163,8 @@ for i in groups:
 def init_layout_theme():
     return {"border_width": 2,
             "margin": 14,
-            "border_focus": "#bd93f9",
-            "border_normal": "#282a36"
+            "border_focus": "#8ec07c",
+            "border_normal": "#282828"
             }
 
 
@@ -178,16 +180,16 @@ layouts = [
 
 
 def init_colors():
-    return [["#282a36", "#282a36"],
-            ["#6272a4", "#6272a4"],
-            ["#f8f8f2", "#f8f8f2"],
-            ["#ff5555", "#ff5555"],
-            ["#50fa7b", "#50fa7b"],
-            ["#f1fa8c", "#f1fa8c"],
-            ["#bd93f9", "#bd93f9"],
-            ["#ff79c6", "#ff79c6"],
-            ["#8be9fd", "#8be9fd"],
-            ["#f8f8f2", "#f8f8f2"]]
+    return [["#282828", "#282828"],
+            ["#a89984", "#a89984"],
+            ["#fbf1c7", "#fbf1c7"],
+            ["#fb4934", "#fb4934"],
+            ["#b8bb26", "#b8bb26"],
+            ["#fabd2f", "#fabd2f"],
+            ["#83a598", "#83a598"],
+            ["#d3869b", "#d3869b"],
+            ["#8ec07c", "#8ec07c"],
+            ["#fbf1c7", "#fbf1c7"]]
 
 
 colors = init_colors()
@@ -248,7 +250,7 @@ def init_widgets_list():
         widget.TextBox(
             text="{",
             background=colors[0],
-            foreground=colors[6]
+            foreground=colors[7]
         ),
         widget.CurrentLayout(
             background=colors[0],
@@ -257,7 +259,34 @@ def init_widgets_list():
         widget.TextBox(
             text="}",
             background=colors[0],
-            foreground=colors[6]
+            foreground=colors[7]
+        ),
+        widget.Sep(
+            linewidth=0,
+            padding=5
+        ),
+        widget.TextBox(
+            text=" ",
+            background=colors[0],
+            foreground=colors[3]
+        ),
+        widget.CPU(
+            format='{freq_current}GHz {load_percent}%',
+            background=colors[0],
+            foreground=colors[9]
+        ),
+        widget.Sep(
+            linewidth=0,
+            padding=5
+        ),
+        widget.TextBox(
+            text=" ",
+            background=colors[0],
+            foreground=colors[5]
+        ),
+        widget.Memory(
+            background=colors[0],
+            foreground=colors[9]
         ),
         widget.Sep(
             linewidth=0,
@@ -266,7 +295,7 @@ def init_widgets_list():
         widget.TextBox(
             text="歷 ",
             background=colors[0],
-            foreground=colors[6]
+            foreground=colors[8]
         ),
         widget.Net(
             interface="enp4s0",
@@ -280,7 +309,7 @@ def init_widgets_list():
         widget.TextBox(
             text=" ",
             background=colors[0],
-            foreground=colors[6]
+            foreground=colors[4]
         ),
         widget.CheckUpdates(
             background=colors[0],
