@@ -28,6 +28,8 @@ set nowritebackup                       " This is recommended by coc
 set formatoptions-=cro                  " Stop newline continution of comments
 set clipboard=unnamedplus               " Copy paste between vim and everything else
 set relativenumber
+set termguicolors
+colorscheme onedark
 
 syntax enable
 filetype on
