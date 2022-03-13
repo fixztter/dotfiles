@@ -1,0 +1,12 @@
+{
+  "background": ["#1a1b26", "#1a1b26"],
+  "background2": ["#32344a", "#32344a"],
+  "foreground": ["#a9b1d6", "#a9b1d6"],
+  "red": ["#f7768e", "#f7768e"],
+  "green": ["#9ece6a", "#9ece6a"],
+  "yellow": ["#e0af68", "#e0af68"],
+  "blue": ["#7aa2f7", "#7aa2f7"],
+  "magenta": ["#ad8ee6", "#ad8ee6"],
+  "cyan": ["#449dab", "#449dab"],
+  "grey": ["#787c99", "#787c99"]
+}
