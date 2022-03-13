@@ -1,35 +1,10 @@
-# Copyright (c) 2010 Aldo Cortesi
-# Copyright (c) 2010, 2014 dequis
-# Copyright (c) 2012 Randall Ma
-# Copyright (c) 2012-2014 Tycho Andersen
-# Copyright (c) 2012 Craig Barnes
-# Copyright (c) 2013 horsik
-# Copyright (c) 2013 Tao Sauvage
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
 import os
 import subprocess
-from typing import List  # noqa: F401
+from typing import List
 from libqtile import bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
+import json
 
 
 @hook.subscribe.startup_once
@@ -107,6 +82,7 @@ keys = [
     Key([mod, "shift"], "Return", lazy.spawn("rofi -show drun")),
     Key([mod], "e", lazy.spawn("thunar")),
     Key([mod], "F12", lazy.spawn("betterlockscreen -l")),
+    Key([mod], "r", lazy.spawn("alacritty -e ranger")),
 
     # Screenshot
     Key([], "Print", lazy.spawn(
@@ -140,7 +116,9 @@ groups = []
 
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+# group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+
+group_labels = ["", "", "", "", "", "", "", "", ""]
 
 group_layouts = ["monadtall", "max", "max", "monadwide",
                  "monadwide", "bsp", "matrix", "bsp", "monadtall"]
@@ -160,11 +138,25 @@ for i in groups:
     ])
 
 
+def load_color_scheme():
+    path = os.path.expanduser("~/.config/qtile/themes/onedark.json")
+    colors = []
+    theme = open(path)
+    data = json.load(theme)
+    for value in data.values():
+        colors.append(value)
+    theme.close()
+    return colors
+
+
+colors = load_color_scheme()
+
+
 def init_layout_theme():
     return {"border_width": 2,
-            "margin": 14,
-            "border_focus": "#8ec07c",
-            "border_normal": "#282828"
+            "margin": 18,
+            "border_focus": colors[6],
+            "border_normal": colors[0]
             }
 
 
@@ -177,22 +169,6 @@ layouts = [
     layout.Bsp(**layout_theme),
     layout.Matrix(**layout_theme),
 ]
-
-
-def init_colors():
-    return [["#282828", "#282828"],
-            ["#a89984", "#a89984"],
-            ["#fbf1c7", "#fbf1c7"],
-            ["#fb4934", "#fb4934"],
-            ["#b8bb26", "#b8bb26"],
-            ["#fabd2f", "#fabd2f"],
-            ["#83a598", "#83a598"],
-            ["#d3869b", "#d3869b"],
-            ["#8ec07c", "#8ec07c"],
-            ["#fbf1c7", "#fbf1c7"]]
-
-
-colors = init_colors()
 
 
 def init_widgets_defaults():
@@ -212,7 +188,8 @@ extension_defaults = widget_defaults.copy()
 def init_widgets_list():
     widgets_list = [
         widget.GroupBox(
-            padding=7,
+            fontsize=28,
+            padding=12,
             margin_x=0,
             borderwidth=3,
             disable_drag=True,
@@ -221,7 +198,7 @@ def init_widgets_list():
             urgent_alert_method="block",
             urgent_border=colors[3],
             highlight_color=colors[1],
-            active=colors[9],
+            active=colors[4],
             inactive=colors[1],
             this_current_screen_border=colors[6],
             block_highlight_text_color=colors[0],
