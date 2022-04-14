@@ -25,9 +25,9 @@ alias l='exa -lah'
 
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
-bindkey "^A" beginning-of-line
+bindkey "^[[H" beginning-of-line
 bindkey "^D" delete-char-or-list
-bindkey "^E" end-of-line
+bindkey "^[[F" end-of-line
 bindkey "^K" kill-line
 bindkey "^O" accept-line
 
@@ -35,5 +35,7 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 
 # ~/.zshrc
+
+neofetch
 
 eval "$(starship init zsh)"
