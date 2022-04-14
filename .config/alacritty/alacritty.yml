@@ -260,7 +260,8 @@ shcemes:
       cyan: "#0db9d7"
       white: "#acb0d0"
 
-window.opacity: 1.0
+  window:
+    opacity: 0.95
 
 colors: *onedark
 
