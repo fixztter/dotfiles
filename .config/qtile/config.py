@@ -15,6 +15,8 @@ def autostart():
 
 mod = "mod4"
 terminal = "alacritty"
+browser = "firefox"
+color_scheme = "monokai"
 
 keys = [
     # Switch between windows
@@ -77,18 +79,23 @@ keys = [
     # Toggle floating, fullscreen
     Key([mod, "shift"], "f", lazy.window.toggle_floating()),
     Key([mod], "f", lazy.window.toggle_fullscreen()),
-
+    
+    # Hide, show bar
+    Key([mod], "t", lazy.hide_show_bar(position="all")),
+    
+    # Launch a specific application
     Key([mod], "Return", lazy.spawn(terminal)),
+    Key([mod], "b", lazy.spawn(browser)),
     Key([mod, "shift"], "Return", lazy.spawn("rofi -show drun")),
     Key([mod], "e", lazy.spawn("thunar")),
     Key([mod], "F12", lazy.spawn("betterlockscreen -l")),
-    Key([mod], "r", lazy.spawn("alacritty -e ranger")),
+    Key([mod, "shift"], "e", lazy.spawn("alacritty -e ranger")),
 
     # Screenshot
     Key([], "Print", lazy.spawn(
-        "scrot $HOME/Pictures/screenshots/%Y-%m-%d-%T-screenshot.png")),
+        "scrot %Y-%m-%d-%T-screenshot.png -e 'xclip -selection clipboard -t image/png -i $f; mv $f ~/Pictures/screenshots/' &>/dev/null")),
     Key([mod], "s", lazy.spawn(
-        "scrot --select $HOME/Pictures/cuts/%Y-%m-%d-%T-cut.png")),
+        "scrot --select %Y-%m-%d-%T-cut.png -e 'xclip -selection clipboard -t image/png -i $f; mv $f ~/Pictures/cuts/' &>/dev/null")),
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout()),
@@ -109,7 +116,7 @@ keys = [
 
     # Restart, Shutdown
     Key([mod, "control"], "r", lazy.restart()),
-    Key([mod, "control"], "q", lazy.shutdown()),
+    Key([mod, "control"], "q", lazy.shutdown())
 ]
 
 groups = []
@@ -118,10 +125,10 @@ group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 # group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-group_labels = ["", "", "", "", "", "", "", "", ""]
+group_labels = ["", "", "", "", "", "", "", "", ""]
 
-group_layouts = ["monadtall", "max", "max", "monadwide",
-                 "monadwide", "bsp", "matrix", "bsp", "monadtall"]
+group_layouts = ["monadtall", "max", "monadwide", "monadwide",
+                 "max", "bsp", "matrix", "bsp", "monadtall"]
 
 for i in range(len(group_names)):
     groups.append(
@@ -139,7 +146,7 @@ for i in groups:
 
 
 def load_color_scheme():
-    path = os.path.expanduser("~/.config/qtile/themes/onedark.json")
+    path = os.path.expanduser(f"~/.config/qtile/themes/{color_scheme}.json")
     colors = []
     theme = open(path)
     data = json.load(theme)
@@ -153,8 +160,8 @@ colors = load_color_scheme()
 
 
 def init_layout_theme():
-    return {"border_width": 2,
-            "margin": 18,
+    return {"border_width": 1,
+            "margin": 6,
             "border_focus": colors[6],
             "border_normal": colors[0]
             }
@@ -188,7 +195,7 @@ extension_defaults = widget_defaults.copy()
 def init_widgets_list():
     widgets_list = [
         widget.GroupBox(
-            fontsize=28,
+            fontsize=30,
             padding=12,
             margin_x=0,
             borderwidth=3,
