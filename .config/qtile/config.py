@@ -16,7 +16,7 @@ def autostart():
 mod = "mod4"
 terminal = "alacritty"
 browser = "firefox"
-color_scheme = "monokai"
+color_scheme = "onedark"
 
 keys = [
     # Switch between windows
@@ -79,10 +79,10 @@ keys = [
     # Toggle floating, fullscreen
     Key([mod, "shift"], "f", lazy.window.toggle_floating()),
     Key([mod], "f", lazy.window.toggle_fullscreen()),
-    
+
     # Hide, show bar
     Key([mod], "t", lazy.hide_show_bar(position="all")),
-    
+
     # Launch a specific application
     Key([mod], "Return", lazy.spawn(terminal)),
     Key([mod], "b", lazy.spawn(browser)),
@@ -90,6 +90,8 @@ keys = [
     Key([mod], "e", lazy.spawn("thunar")),
     Key([mod], "F12", lazy.spawn("betterlockscreen -l")),
     Key([mod, "shift"], "e", lazy.spawn("alacritty -e ranger")),
+    Key([mod, "shift"], "w", lazy.spawn(
+        "nitrogen --set-zoom-fill --random &>/dev/null")),
 
     # Screenshot
     Key([], "Print", lazy.spawn(
@@ -160,8 +162,8 @@ colors = load_color_scheme()
 
 
 def init_layout_theme():
-    return {"border_width": 1,
-            "margin": 6,
+    return {"border_width": 2,
+            "margin": 12,
             "border_focus": colors[6],
             "border_normal": colors[0]
             }
@@ -171,6 +173,7 @@ layout_theme = init_layout_theme()
 
 layouts = [
     layout.Max(**layout_theme),
+    layout.Columns(**layout_theme),
     layout.MonadTall(**layout_theme),
     layout.MonadWide(**layout_theme),
     layout.Bsp(**layout_theme),
@@ -214,7 +217,7 @@ def init_widgets_list():
         ),
         widget.Sep(
             linewidth=0,
-            padding=5
+            padding=6
         ),
         widget.WindowName(
             background=colors[0],
@@ -222,32 +225,14 @@ def init_widgets_list():
         ),
         widget.Sep(
             linewidth=0,
-            padding=5
+            padding=6
         ),
         widget.Systray(
             background=colors[0]
         ),
         widget.Sep(
             linewidth=0,
-            padding=5
-        ),
-        widget.TextBox(
-            text="{",
-            background=colors[0],
-            foreground=colors[7]
-        ),
-        widget.CurrentLayout(
-            background=colors[0],
-            foreground=colors[9]
-        ),
-        widget.TextBox(
-            text="}",
-            background=colors[0],
-            foreground=colors[7]
-        ),
-        widget.Sep(
-            linewidth=0,
-            padding=5
+            padding=6
         ),
         widget.TextBox(
             text=" ",
@@ -257,11 +242,11 @@ def init_widgets_list():
         widget.CPU(
             format='{freq_current}GHz {load_percent}%',
             background=colors[0],
-            foreground=colors[9]
+            foreground=colors[3]
         ),
         widget.Sep(
             linewidth=0,
-            padding=5
+            padding=6
         ),
         widget.TextBox(
             text=" ",
@@ -270,11 +255,11 @@ def init_widgets_list():
         ),
         widget.Memory(
             background=colors[0],
-            foreground=colors[9]
+            foreground=colors[5]
         ),
         widget.Sep(
             linewidth=0,
-            padding=5
+            padding=6
         ),
         widget.TextBox(
             text="歷 ",
@@ -284,11 +269,11 @@ def init_widgets_list():
         widget.Net(
             interface="enp4s0",
             background=colors[0],
-            foreground=colors[9]
+            foreground=colors[8]
         ),
         widget.Sep(
             linewidth=0,
-            padding=5
+            padding=6
         ),
         widget.TextBox(
             text=" ",
@@ -297,16 +282,16 @@ def init_widgets_list():
         ),
         widget.CheckUpdates(
             background=colors[0],
-            foreground=colors[9],
-            colour_have_updates=colors[9],
-            colour_no_updates=colors[9],
+            foreground=colors[4],
+            colour_have_updates=colors[4],
+            colour_no_updates=colors[4],
             custom_command="checkupdates",
             no_update_string='0',
             display_format="{updates}"
         ),
         widget.Sep(
             linewidth=0,
-            padding=5
+            padding=6
         ),
         widget.TextBox(
             text=" ",
@@ -315,9 +300,13 @@ def init_widgets_list():
         ),
         widget.Clock(
             background=colors[0],
-            foreground=colors[9],
+            foreground=colors[6],
             format="%Y-%m-%d %H:%M"
         ),
+        widget.CurrentLayoutIcon(
+            foreground=colors[9],
+            scale=0.6
+        )
     ]
     return widgets_list
 
@@ -357,12 +346,7 @@ cursor_warp = False
 floating_layout = layout.Floating(float_rules=[
     # Run the utility of `xprop` to see the wm class and name of an X client.
     *layout.Floating.default_float_rules,
-    Match(wm_class='confirmreset'),  # gitk
-    Match(wm_class='makebranch'),  # gitk
-    Match(wm_class='maketag'),  # gitk
-    Match(wm_class='ssh-askpass'),  # ssh-askpass
-    Match(title='branchdialog'),  # gitk
-    Match(title='pinentry'),  # GPG key password entry
+    Match(wm_class='VirtualBox Machine'),  # VirtualBox VMs
 ], **layout_theme)
 auto_fullscreen = True
 focus_on_window_activation = "smart"
