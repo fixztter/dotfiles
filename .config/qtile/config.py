@@ -1,35 +1,10 @@
-# Copyright (c) 2010 Aldo Cortesi
-# Copyright (c) 2010, 2014 dequis
-# Copyright (c) 2012 Randall Ma
-# Copyright (c) 2012-2014 Tycho Andersen
-# Copyright (c) 2012 Craig Barnes
-# Copyright (c) 2013 horsik
-# Copyright (c) 2013 Tao Sauvage
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
 import os
 import subprocess
-from typing import List  # noqa: F401
+from typing import List
 from libqtile import bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
+import json
 
 
 @hook.subscribe.startup_once
@@ -40,6 +15,8 @@ def autostart():
 
 mod = "mod4"
 terminal = "alacritty"
+browser = "firefox"
+color_scheme = "onedark"
 
 keys = [
     # Switch between windows
@@ -103,16 +80,24 @@ keys = [
     Key([mod, "shift"], "f", lazy.window.toggle_floating()),
     Key([mod], "f", lazy.window.toggle_fullscreen()),
 
+    # Hide, show bar
+    Key([mod], "t", lazy.hide_show_bar(position="all")),
+
+    # Launch a specific application
     Key([mod], "Return", lazy.spawn(terminal)),
+    Key([mod], "b", lazy.spawn(browser)),
     Key([mod, "shift"], "Return", lazy.spawn("rofi -show drun")),
     Key([mod], "e", lazy.spawn("thunar")),
     Key([mod], "F12", lazy.spawn("betterlockscreen -l")),
+    Key([mod, "shift"], "e", lazy.spawn("alacritty -e ranger")),
+    Key([mod, "shift"], "w", lazy.spawn(
+        "nitrogen --set-zoom-fill --random &>/dev/null")),
 
     # Screenshot
     Key([], "Print", lazy.spawn(
-        "scrot $HOME/Pictures/screenshots/%Y-%m-%d-%T-screenshot.png")),
+        "scrot %Y-%m-%d-%T-screenshot.png -e 'xclip -selection clipboard -t image/png -i $f; mv $f ~/Pictures/screenshots/' &>/dev/null")),
     Key([mod], "s", lazy.spawn(
-        "scrot --select $HOME/Pictures/cuts/%Y-%m-%d-%T-cut.png")),
+        "scrot --select %Y-%m-%d-%T-cut.png -e 'xclip -selection clipboard -t image/png -i $f; mv $f ~/Pictures/cuts/' &>/dev/null")),
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout()),
@@ -133,17 +118,19 @@ keys = [
 
     # Restart, Shutdown
     Key([mod, "control"], "r", lazy.restart()),
-    Key([mod, "control"], "q", lazy.shutdown()),
+    Key([mod, "control"], "q", lazy.shutdown())
 ]
 
 groups = []
 
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+# group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-group_layouts = ["monadtall", "max", "max", "monadwide",
-                 "monadwide", "bsp", "matrix", "bsp", "monadtall"]
+group_labels = ["", "", "", "", "", "", "", "", ""]
+
+group_layouts = ["monadtall", "max", "monadwide", "monadwide",
+                 "max", "bsp", "matrix", "bsp", "monadtall"]
 
 for i in range(len(group_names)):
     groups.append(
@@ -160,11 +147,25 @@ for i in groups:
     ])
 
 
+def load_color_scheme():
+    path = os.path.expanduser(f"~/.config/qtile/themes/{color_scheme}.json")
+    colors = []
+    theme = open(path)
+    data = json.load(theme)
+    for value in data.values():
+        colors.append(value)
+    theme.close()
+    return colors
+
+
+colors = load_color_scheme()
+
+
 def init_layout_theme():
     return {"border_width": 2,
-            "margin": 14,
-            "border_focus": "#8ec07c",
-            "border_normal": "#282828"
+            "margin": 12,
+            "border_focus": colors[6],
+            "border_normal": colors[0]
             }
 
 
@@ -172,27 +173,12 @@ layout_theme = init_layout_theme()
 
 layouts = [
     layout.Max(**layout_theme),
+    layout.Columns(**layout_theme),
     layout.MonadTall(**layout_theme),
     layout.MonadWide(**layout_theme),
     layout.Bsp(**layout_theme),
     layout.Matrix(**layout_theme),
 ]
-
-
-def init_colors():
-    return [["#282828", "#282828"],
-            ["#a89984", "#a89984"],
-            ["#fbf1c7", "#fbf1c7"],
-            ["#fb4934", "#fb4934"],
-            ["#b8bb26", "#b8bb26"],
-            ["#fabd2f", "#fabd2f"],
-            ["#83a598", "#83a598"],
-            ["#d3869b", "#d3869b"],
-            ["#8ec07c", "#8ec07c"],
-            ["#fbf1c7", "#fbf1c7"]]
-
-
-colors = init_colors()
 
 
 def init_widgets_defaults():
@@ -212,7 +198,8 @@ extension_defaults = widget_defaults.copy()
 def init_widgets_list():
     widgets_list = [
         widget.GroupBox(
-            padding=7,
+            fontsize=30,
+            padding=12,
             margin_x=0,
             borderwidth=3,
             disable_drag=True,
@@ -221,7 +208,7 @@ def init_widgets_list():
             urgent_alert_method="block",
             urgent_border=colors[3],
             highlight_color=colors[1],
-            active=colors[9],
+            active=colors[4],
             inactive=colors[1],
             this_current_screen_border=colors[6],
             block_highlight_text_color=colors[0],
@@ -230,7 +217,7 @@ def init_widgets_list():
         ),
         widget.Sep(
             linewidth=0,
-            padding=5
+            padding=6
         ),
         widget.WindowName(
             background=colors[0],
@@ -238,32 +225,14 @@ def init_widgets_list():
         ),
         widget.Sep(
             linewidth=0,
-            padding=5
+            padding=6
         ),
         widget.Systray(
             background=colors[0]
         ),
         widget.Sep(
             linewidth=0,
-            padding=5
-        ),
-        widget.TextBox(
-            text="{",
-            background=colors[0],
-            foreground=colors[7]
-        ),
-        widget.CurrentLayout(
-            background=colors[0],
-            foreground=colors[9]
-        ),
-        widget.TextBox(
-            text="}",
-            background=colors[0],
-            foreground=colors[7]
-        ),
-        widget.Sep(
-            linewidth=0,
-            padding=5
+            padding=6
         ),
         widget.TextBox(
             text=" ",
@@ -273,11 +242,11 @@ def init_widgets_list():
         widget.CPU(
             format='{freq_current}GHz {load_percent}%',
             background=colors[0],
-            foreground=colors[9]
+            foreground=colors[3]
         ),
         widget.Sep(
             linewidth=0,
-            padding=5
+            padding=6
         ),
         widget.TextBox(
             text=" ",
@@ -286,11 +255,11 @@ def init_widgets_list():
         ),
         widget.Memory(
             background=colors[0],
-            foreground=colors[9]
+            foreground=colors[5]
         ),
         widget.Sep(
             linewidth=0,
-            padding=5
+            padding=6
         ),
         widget.TextBox(
             text="歷 ",
@@ -300,11 +269,11 @@ def init_widgets_list():
         widget.Net(
             interface="enp4s0",
             background=colors[0],
-            foreground=colors[9]
+            foreground=colors[8]
         ),
         widget.Sep(
             linewidth=0,
-            padding=5
+            padding=6
         ),
         widget.TextBox(
             text=" ",
@@ -313,16 +282,16 @@ def init_widgets_list():
         ),
         widget.CheckUpdates(
             background=colors[0],
-            foreground=colors[9],
-            colour_have_updates=colors[9],
-            colour_no_updates=colors[9],
+            foreground=colors[4],
+            colour_have_updates=colors[4],
+            colour_no_updates=colors[4],
             custom_command="checkupdates",
             no_update_string='0',
             display_format="{updates}"
         ),
         widget.Sep(
             linewidth=0,
-            padding=5
+            padding=6
         ),
         widget.TextBox(
             text=" ",
@@ -331,9 +300,13 @@ def init_widgets_list():
         ),
         widget.Clock(
             background=colors[0],
-            foreground=colors[9],
+            foreground=colors[6],
             format="%Y-%m-%d %H:%M"
         ),
+        widget.CurrentLayoutIcon(
+            foreground=colors[9],
+            scale=0.6
+        )
     ]
     return widgets_list
 
@@ -373,12 +346,7 @@ cursor_warp = False
 floating_layout = layout.Floating(float_rules=[
     # Run the utility of `xprop` to see the wm class and name of an X client.
     *layout.Floating.default_float_rules,
-    Match(wm_class='confirmreset'),  # gitk
-    Match(wm_class='makebranch'),  # gitk
-    Match(wm_class='maketag'),  # gitk
-    Match(wm_class='ssh-askpass'),  # ssh-askpass
-    Match(title='branchdialog'),  # gitk
-    Match(title='pinentry'),  # GPG key password entry
+    Match(wm_class='VirtualBox Machine'),  # VirtualBox VMs
 ], **layout_theme)
 auto_fullscreen = True
 focus_on_window_activation = "smart"
