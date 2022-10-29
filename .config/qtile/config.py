@@ -17,6 +17,7 @@ mod = "mod4"
 terminal = "alacritty"
 browser = "firefox"
 color_scheme = "onedark"
+scripts_path = ".scripts"
 
 keys = [
     # Switch between windows
@@ -93,6 +94,11 @@ keys = [
     Key([mod, "shift"], "w", lazy.spawn(
         "nitrogen --set-zoom-fill --random &>/dev/null")),
 
+    # Launch custom scripts
+    Key([mod, "shift"], "c", lazy.spawn(f"./{scripts_path}/chxkbmap")),
+    Key([mod, "shift"], "p", lazy.spawn(f"./{scripts_path}/toggle-picom")),
+    Key([mod, "shift"], "r", lazy.spawn(f"./{scripts_path}/toggle-redshift")),
+
     # Screenshot
     Key([], "Print", lazy.spawn(
         "scrot %Y-%m-%d-%T-screenshot.png -e 'xclip -selection clipboard -t image/png -i $f; mv $f ~/Pictures/screenshots/' &>/dev/null")),
@@ -162,8 +168,8 @@ colors = load_color_scheme()
 
 
 def init_layout_theme():
-    return {"border_width": 2,
-            "margin": 12,
+    return {"border_width": 1,
+            "margin": 6,
             "border_focus": colors[6],
             "border_normal": colors[0]
             }
@@ -346,7 +352,9 @@ cursor_warp = False
 floating_layout = layout.Floating(float_rules=[
     # Run the utility of `xprop` to see the wm class and name of an X client.
     *layout.Floating.default_float_rules,
-    Match(wm_class='VirtualBox Machine'),  # VirtualBox VMs
+    Match(wm_class='VirtualBox Machine'), # VirtualBox VMs
+    Match(wm_class='Nm-connection-editor'), # Network Manager Connection Editor
+    Match(wm_class='Browser'),
 ], **layout_theme)
 auto_fullscreen = True
 focus_on_window_activation = "smart"
