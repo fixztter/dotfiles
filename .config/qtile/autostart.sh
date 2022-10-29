@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 
 volumeicon &
 
@@ -7,6 +7,8 @@ nm-applet &
 unclutter &
 
 picom &
+
+dunst &
 
 nitrogen --restore &
 
