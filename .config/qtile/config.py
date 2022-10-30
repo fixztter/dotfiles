@@ -354,6 +354,7 @@ floating_layout = layout.Floating(float_rules=[
     *layout.Floating.default_float_rules,
     Match(wm_class='VirtualBox Machine'), # VirtualBox VMs
     Match(wm_class='Nm-connection-editor'), # Network Manager Connection Editor
+    Match(wm_class='Galculator'),
     Match(wm_class='Browser'),
 ], **layout_theme)
 auto_fullscreen = True
