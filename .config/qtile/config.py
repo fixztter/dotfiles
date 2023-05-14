@@ -29,7 +29,7 @@ keys = [
     Key([mod], "Right", lazy.layout.right()),
     Key([mod], "Down", lazy.layout.down()),
     Key([mod], "Up", lazy.layout.up()),
-    Key([mod], "space", lazy.layout.next()),
+    Key([mod], "space", lazy.group.next_window()),
 
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
@@ -78,7 +78,7 @@ keys = [
     Key([mod], "n", lazy.layout.normalize()),
 
     # Toggle floating, fullscreen
-    Key([mod, "shift"], "f", lazy.window.toggle_floating()),
+    Key([mod, "shift"], "f", lazy.window.toggle_floating(), lazy.window.center()),
     Key([mod], "f", lazy.window.toggle_fullscreen()),
 
     # Hide, show bar
@@ -87,17 +87,16 @@ keys = [
     # Launch a specific application
     Key([mod], "Return", lazy.spawn(terminal)),
     Key([mod], "b", lazy.spawn(browser)),
-    Key([mod, "shift"], "Return", lazy.spawn("rofi -show drun")),
+    Key([mod], "r", lazy.spawn("rofi -show drun")),
     Key([mod], "e", lazy.spawn("thunar")),
     Key([mod], "F12", lazy.spawn("betterlockscreen -l")),
     Key([mod, "shift"], "e", lazy.spawn("alacritty -e ranger")),
-    Key([mod, "shift"], "w", lazy.spawn(
-        "nitrogen --set-zoom-fill --random &>/dev/null")),
 
     # Launch custom scripts
     Key([mod, "shift"], "c", lazy.spawn(f"./{scripts_path}/chxkbmap")),
     Key([mod, "shift"], "p", lazy.spawn(f"./{scripts_path}/toggle-picom")),
     Key([mod, "shift"], "r", lazy.spawn(f"./{scripts_path}/toggle-redshift")),
+    Key([mod, "shift"], "w", lazy.spawn(f"./{scripts_path}/wall-random")),
 
     # Screenshot
     Key([], "Print", lazy.spawn(
@@ -131,9 +130,9 @@ groups = []
 
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-# group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-group_labels = ["", "", "", "", "", "", "", "", ""]
+# group_labels = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 
 group_layouts = ["monadtall", "max", "monadwide", "monadwide",
                  "max", "bsp", "matrix", "bsp", "monadtall"]
@@ -189,8 +188,8 @@ layouts = [
 
 def init_widgets_defaults():
     return dict(
-        font="UbuntuMono Nerd Font Bold",
-        fontsize=14,
+        font="JetBrainsMono Nerd Font Bold",
+        fontsize=12,
         padding=3,
         background=colors[0]
     )
@@ -204,7 +203,7 @@ extension_defaults = widget_defaults.copy()
 def init_widgets_list():
     widgets_list = [
         widget.GroupBox(
-            fontsize=30,
+            fontsize=12,
             padding=12,
             margin_x=0,
             borderwidth=3,
@@ -268,7 +267,7 @@ def init_widgets_list():
             padding=6
         ),
         widget.TextBox(
-            text="歷 ",
+            text="󰒍 ",
             background=colors[0],
             foreground=colors[8]
         ),
@@ -307,7 +306,8 @@ def init_widgets_list():
         widget.Clock(
             background=colors[0],
             foreground=colors[6],
-            format="%Y-%m-%d %H:%M"
+            # format="%Y-%m-%d %H:%M"
+            format="%a, %b %d %H:%M"
         ),
         widget.CurrentLayoutIcon(
             foreground=colors[9],
