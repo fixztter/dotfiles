@@ -96,7 +96,6 @@ keys = [
     Key([mod, "shift"], "c", lazy.spawn(f"./{scripts_path}/chxkbmap")),
     Key([mod, "shift"], "p", lazy.spawn(f"./{scripts_path}/toggle-picom")),
     Key([mod, "shift"], "r", lazy.spawn(f"./{scripts_path}/toggle-redshift")),
-    Key([mod, "shift"], "w", lazy.spawn(f"./{scripts_path}/wall-random")),
 
     # Screenshot
     Key([], "Print", lazy.spawn(
