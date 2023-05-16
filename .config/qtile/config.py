@@ -96,6 +96,7 @@ keys = [
     Key([mod, "shift"], "c", lazy.spawn(f"./{scripts_path}/chxkbmap")),
     Key([mod, "shift"], "p", lazy.spawn(f"./{scripts_path}/toggle-picom")),
     Key([mod, "shift"], "r", lazy.spawn(f"./{scripts_path}/toggle-redshift")),
+    Key([mod, "shift"], "w", lazy.spawn(f"./{scripts_path}/random-wallpaper")),
 
     # Screenshot
     Key([], "Print", lazy.spawn(
@@ -131,7 +132,7 @@ group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-# group_labels = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+# group_labels = [" ", " ", " ", " ", " ", " ", " ", "󰍢 ", " "]
 
 group_layouts = ["monadtall", "max", "monadwide", "monadwide",
                  "max", "bsp", "matrix", "bsp", "monadtall"]
@@ -202,7 +203,6 @@ extension_defaults = widget_defaults.copy()
 def init_widgets_list():
     widgets_list = [
         widget.GroupBox(
-            fontsize=12,
             padding=12,
             margin_x=0,
             borderwidth=3,
