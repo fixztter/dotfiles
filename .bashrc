@@ -13,13 +13,18 @@ export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
 export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
-alias ls='exa'
+alias ls='exa --icons --group-directories-first'
+alias ll='exa -lh'
+alias la='exa -ah'
+alias l='exa -lah'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
-alias ll='exa -l'
-alias la='exa -a'
-alias l='exa -la'
+
+# alias ls='ls --color=auto --group-directories-first'
+# alias ll='ls -lh'
+# alias la='ls -ah'
+# alias l='ls -lah'
 
 . /usr/share/git/git-prompt.sh
 GIT_PS1_SHOWDIRTYSTATE=1
