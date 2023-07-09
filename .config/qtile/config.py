@@ -17,7 +17,6 @@ mod = "mod4"
 terminal = "alacritty"
 browser = "firefox"
 color_scheme = "onedark"
-scripts_path = ".scripts"
 
 keys = [
     # Switch between windows
@@ -93,10 +92,10 @@ keys = [
     Key([mod, "shift"], "e", lazy.spawn("alacritty -e ranger")),
 
     # Launch custom scripts
-    Key([mod, "shift"], "c", lazy.spawn(f"./{scripts_path}/chxkbmap")),
-    Key([mod, "shift"], "p", lazy.spawn(f"./{scripts_path}/toggle-picom")),
-    Key([mod, "shift"], "r", lazy.spawn(f"./{scripts_path}/toggle-redshift")),
-    Key([mod, "shift"], "w", lazy.spawn(f"./{scripts_path}/random-wallpaper")),
+    Key([mod, "shift"], "c", lazy.spawn("chxkbmap")),
+    Key([mod, "shift"], "p", lazy.spawn("toggle-picom")),
+    Key([mod, "shift"], "r", lazy.spawn("toggle-redshift")),
+    Key([mod, "shift"], "w", lazy.spawn("random-wallpaper")),
 
     # Screenshot
     Key([], "Print", lazy.spawn(
