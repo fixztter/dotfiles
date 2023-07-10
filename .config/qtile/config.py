@@ -81,11 +81,11 @@ keys = [
     Key([mod], "f", lazy.window.toggle_fullscreen()),
 
     # Hide, show bar
-    Key([mod], "t", lazy.hide_show_bar(position="all")),
+    Key([mod], "b", lazy.hide_show_bar(position="all")),
 
     # Launch a specific application
     Key([mod], "Return", lazy.spawn(terminal)),
-    Key([mod], "b", lazy.spawn(browser)),
+    Key([mod], "w", lazy.spawn(browser)),
     Key([mod], "r", lazy.spawn("rofi -show drun")),
     Key([mod], "e", lazy.spawn("thunar")),
     Key([mod], "F12", lazy.spawn("betterlockscreen -l")),
