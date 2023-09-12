@@ -21,7 +21,7 @@ window:
     # General application class
     general: Alacritty
 
-  # opacity: 0.95
+  opacity: 0.95
 
 scrolling:
   history: 10000
@@ -53,8 +53,6 @@ draw_bold_text_with_bright_colors: true
 
 key_bindings:
   # (Windows, Linux, and BSD only)
-  - { key: V, mods: Control|Shift, action: Paste }
-  - { key: C, mods: Control|Shift, action: Copy }
   - { key: Insert, mods: Shift, action: PasteSelection }
   - { key: Key0, mods: Control, action: ResetFontSize }
   - { key: Equals, mods: Control, action: IncreaseFontSize }
@@ -70,4 +68,15 @@ key_bindings:
   - { key: PageDown, mods: None, action: ScrollPageDown, mode: ~Alt }
   - { key: Home, mods: Shift, action: ScrollToTop, mode: ~Alt }
   - { key: End, mods: Shift, action: ScrollToBottom, mode: ~Alt }
+
+  # Custom
   - { key: Return, mods: Control, action: SpawnNewInstance }
+  - { key: Return, mods: Alt, action: SpawnNewInstance }
+  - { key: C, mods: Alt, action: Copy }
+  - { key: V, mods: Alt, action: Paste }
+  - { key: U, mods: Alt, action: ScrollPageUp, mode: ~Alt }
+  - { key: D, mods: Alt, action: ScrollPageDown, mode: ~Alt }
+  - { key: K, mods: Alt,  action: ScrollLineUp }
+  - { key: J, mods: Alt, action: ScrollLineDown }
+  - { key: Home, mods: Alt, action: ScrollToTop, mode: ~Alt }
+  - { key: End, mods: Alt, action: ScrollToBottom, mode: ~Alt }
