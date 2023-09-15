@@ -89,7 +89,7 @@ keys = [
     Key([mod], "r", lazy.spawn("rofi -show drun")),
     Key([mod], "e", lazy.spawn("thunar")),
     Key([mod], "F12", lazy.spawn("betterlockscreen -l")),
-    Key([mod, "shift"], "e", lazy.spawn("alacritty -e ranger")),
+    Key([mod, "shift"], "e", lazy.spawn(f"{terminal} -e ranger")),
 
     # Launch custom scripts
     Key([mod, "shift"], "c", lazy.spawn("chxkbmap")),
