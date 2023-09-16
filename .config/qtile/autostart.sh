@@ -1,15 +1,21 @@
 #!/bin/sh
 
-volumeicon &
+run()
+{
+    [ -z $(pgrep -x $1) ] && $@&
+}
 
-nm-applet &
+run "volumeicon"
 
-unclutter &
+run "nm-applet"
 
-picom &
+run "unclutter"
 
-dunst &
+run "picom"
 
-nitrogen --restore &
+run "dunst"
 
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+run "nitrogen --restore"
+
+run "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+
