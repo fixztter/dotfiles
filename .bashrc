@@ -22,10 +22,10 @@ export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
 export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
-alias ls='exa --group-directories-first --icons'
-alias ll='exa -lh --group-directories-first --icons'
-alias la='exa -ah --group-directories-first --icons'
-alias l='exa -lah --group-directories-first --icons'
+alias ls='eza --group-directories-first --icons=always'
+alias ll='eza -lh --group-directories-first --icons=always'
+alias la='eza -ah --group-directories-first --icons=always'
+alias l='eza -lah --group-directories-first --icons=always'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'

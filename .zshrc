@@ -14,10 +14,10 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.cache/zsh/history
 
-alias ls='exa --group-directories-first --icons'
-alias ll='exa -lh --group-directories-first --icons'
-alias la='exa -a --group-directories-first --icons'
-alias l='exa -lah --group-directories-first --icons'
+alias ls='eza --group-directories-first --icons=always'
+alias ll='eza -lh --group-directories-first --icons=always'
+alias la='eza -a --group-directories-first --icons=always'
+alias l='eza -lah --group-directories-first --icons=always'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
