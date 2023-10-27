@@ -4,6 +4,15 @@
 [[ $DISPLAY ]] && shopt -s checkwinsize
 
 export EDITOR="nvim"
+export VISUAL="nvim"
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
+export GOPATH="$XDG_DATA_HOME/go"
+export GOBIN="$GOPATH/bin"
+# export GOROOT=/usr/local/go
 
 export LESS_TERMCAP_mb=$'\E[1;31m'     # begin blink
 export LESS_TERMCAP_md=$'\E[1;36m'     # begin bold
