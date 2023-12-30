@@ -12,6 +12,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
 export GOPATH="$XDG_DATA_HOME/go"
 export GOBIN="$GOPATH/bin"
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
 # export GOROOT=/usr/local/go
 
 export LESS_TERMCAP_mb=$'\E[1;31m'     # begin blink
