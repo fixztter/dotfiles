@@ -23,6 +23,11 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias r='ranger'
 
+#alias ls='ls --color=auto --group-directories-first'
+#alias ll='ls -lh'
+#alias la='ls -ah'
+#alias l='ls -lah'
+
 WORDCHARS=${WORDCHARS//\/}
 bindkey -v
 bindkey "^[[1;5C" forward-word
